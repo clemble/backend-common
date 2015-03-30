@@ -54,6 +54,7 @@
         <lettuce.version>2.3.3</lettuce.version>
         <lutung.version>0.0.5</lutung.version>
         <!-- Dependencies for Spring Social -->
+        <spring.boot.version>1.2.2.RELEASE</spring.boot.version>
         <spring.social.core.version>1.1.0.RELEASE</spring.social.core.version>
         <spring.social.version>1.1.0.RELEASE</spring.social.version>
         <spring.social.linkedin.version>1.0.1.RELEASE</spring.social.linkedin.version>
@@ -725,6 +726,12 @@
                 <groupId>de.roderick</groupId>
                 <artifactId>weberknecht</artifactId>
                 <version>${weberknecht.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${spring.boot.version}</version>
             </dependency>
 
             <dependency>
