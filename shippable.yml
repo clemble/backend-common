@@ -15,10 +15,5 @@ services:
     - rabbitmq
     - neo4j
 
-before_script:
-  - mkdir -p ~/clemble/config
-  - mkdir -p ~/clemble-casino/shippable/testresults
-  - cp ./config/*.properties ~/clemble/config/
-
 after_success:
   - mvn deploy
