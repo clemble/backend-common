@@ -24,9 +24,11 @@ public class AuthenticationHandleInterceptor implements HandlerInterceptor {
                     return true;
         // Step 2. Checking this is not one of registration URL's
         String uri = request.getRequestURI();
-        if (uri.startsWith(RegistrationWebMapping.REGISTRATION_BASE) ||
-            uri.startsWith(SocialWebMapping.SOCIAL_REGISTRATION_BASE) ||
-            uri.startsWith(SocialWebMapping.SOCIAL_SIGN_IN_BASE))
+        if (uri.endsWith(RegistrationWebMapping.REGISTRATION_LOGIN) ||
+            uri.endsWith(RegistrationWebMapping.REGISTRATION_PROFILE) ||
+            uri.endsWith(SocialWebMapping.SOCIAL_REGISTRATION_GRANT) ||
+            uri.endsWith(SocialWebMapping.SOCIAL_REGISTRATION_DESCRIPTION) ||
+            uri.endsWith(SocialWebMapping.SOCIAL_SIGN_IN_BASE))
             return true;
         // Step 3. Sending 401 Response
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
