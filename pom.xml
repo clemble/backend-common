@@ -34,6 +34,8 @@
         <lutung.version>0.0.5</lutung.version>
         <jedis.version>2.6.2</jedis.version>
 
+
+        <jmustache.version>1.10</jmustache.version>
          <!-- AMQP dependencies -->
         <spring-amqp.version>1.4.3.RELEASE</spring-amqp.version>
 
@@ -209,7 +211,13 @@
             <scope>provided</scope>
         </dependency>
 
-               <!-- JSON dependencies -->
+        <dependency>
+            <groupId>com.samskivert</groupId>
+            <artifactId>jmustache</artifactId>
+            <version>${jmustache.version}</version>
+        </dependency>
+
+        <!-- JSON dependencies -->
 
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
