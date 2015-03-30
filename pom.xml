@@ -58,6 +58,21 @@
             <url>s3://clemble/snapshot</url>
         </snapshotRepository>
     </distributionManagement>
+    <repositories>
+        <repository>
+            <id>aws-release</id>
+            <name>AWS Release Repository</name>
+            <url>s3://clemble/release</url>
+        </repository>
+        <repository>
+            <id>aws-snapshot</id>
+            <name>AWS Snapshot Repository</name>
+            <url>s3://clemble/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>com.clemble.casino.client</groupId>
