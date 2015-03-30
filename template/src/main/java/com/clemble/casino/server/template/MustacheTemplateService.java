@@ -5,7 +5,6 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;
-import org.apache.lucene.util.IOUtils;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.InputStream;

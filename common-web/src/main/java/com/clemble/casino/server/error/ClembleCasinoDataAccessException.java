@@ -23,4 +23,5 @@ public class ClembleCasinoDataAccessException extends DataAccessException implem
     public ClembleCasinoException getCasinoException() {
         return casinoException;
     }
+
 }
