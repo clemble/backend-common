@@ -14,7 +14,9 @@ import redis.clients.jedis.JedisPool;
 public class RedisSpringConfiguration implements SpringConfiguration {
 
     @Bean
-    public JedisPool jedisPool(@Value("${clemble.db.redis.host}") String host) {
+    public JedisPool jedisPool(
+        @Value("${REDIS_MASTER_SERVICE_HOST}") String host,
+        @Value("${REDIS_MASTER_SERVICE_PORT}") int port) {
         return new JedisPool(host);
     }
 

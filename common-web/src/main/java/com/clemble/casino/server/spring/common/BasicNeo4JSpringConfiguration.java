@@ -25,10 +25,10 @@ abstract public class BasicNeo4JSpringConfiguration extends Neo4jConfiguration i
 
     @Bean(destroyMethod = "shutdown")
     public GraphDatabaseService graphDatabaseService(
-        @Value("${clemble.db.neo4j.url}") String url,
-        @Value("${clemble.db.neo4j.user}") String user,
-        @Value("${clemble.db.neo4j.password}") String password) {
-        SpringRestGraphDatabase graphDatabase = new SpringRestGraphDatabase(url, user, password);
+        @Value("${NEO4j_MASTER_SERVICE_HOST}") String host,
+        @Value("${NEO4j_MASTER_SERVICE_PORT}") int port) {
+        String url = "http://" + host + ":" + port + "/db/data";
+        SpringRestGraphDatabase graphDatabase = new SpringRestGraphDatabase(url);
         return graphDatabase;
     }
 
