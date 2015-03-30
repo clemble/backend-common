@@ -116,16 +116,16 @@
     </dependencies>
 
     <build>
-        <plugins><plugin>
+        <plugins>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <reportsDirectory>./shippable/testresults</reportsDirectory>
+                    <reportsDirectory>../shippable/testresults</reportsDirectory>
                     <argLine>${surefireArgLine}</argLine>
                 </configuration>
-                <!-- <configuration> <systemProperties> <property> <name>clemble.casino.management.url</name>
-                    <value>http://localhost:8080/integration-management-web/</value> </property>
-                    </systemProperties> </configuration> -->
-            </plugin></plugins>
+            </plugin>
+        </plugins>
     </build>
+
 </project>
