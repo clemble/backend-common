@@ -1,6 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.2.2.RELEASE</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.clemble.casino.server</groupId>
     <artifactId>server</artifactId>
@@ -66,8 +72,6 @@
         <google.calendar.api.version>v3-rev118-1.19.1</google.calendar.api.version>
         <!-- Generic dependencies -->
         <logback.version>1.1.2</logback.version>
-        <loggly.version>0.1.2</loggly.version>
-        <logentries.version>1.1.29</logentries.version>
         <logback-syslog4j.version>1.0.0</logback-syslog4j.version>
         <jackson.version>2.5.1</jackson.version>
         <!-- Test dependencies -->
@@ -187,12 +191,13 @@
                 <version>${validation-api.version}</version>
             </dependency>
 
-            <!-- Internal components dependencies -->
             <dependency>
                 <groupId>org.reflections</groupId>
                 <artifactId>reflections</artifactId>
                 <version>${reflections.version}</version>
             </dependency>
+
+            <!-- Internal components dependencies -->
 
             <dependency>
                 <groupId>com.clemble.casino.server</groupId>
@@ -204,19 +209,16 @@
                 <artifactId>common-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.clemble.casino.server</groupId>
                 <artifactId>test-utils</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.clemble.casino.server</groupId>
                 <artifactId>schedule</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.clemble.casino.server</groupId>
                 <artifactId>game</artifactId>
@@ -397,91 +399,6 @@
                 <version>${commons-codec.version}</version>
             </dependency>
 
-            <!-- Generic Spring configurations -->
-
-            <dependency>
-                <groupId>com.samskivert</groupId>
-                <artifactId>jmustache</artifactId>
-                <version>${jmustache.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aop</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-core</artifactId>
-                <version>${spring.security.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-jpa</artifactId>
-                <version>${spring-data-jpa.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-commons</artifactId>
-                <version>${spring-data-common.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-neo4j</artifactId>
-                <version>${sprind-data-neo4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-neo4j-rest</artifactId>
-                <version>${sprind-data-neo4j.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.security.oauth</groupId>
-                <artifactId>spring-security-oauth</artifactId>
-                <version>${spring.security.oauth2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-config</artifactId>
-                <version>${spring.security.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-web</artifactId>
-                <version>${spring.security.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.lambdaworks</groupId>
-                <artifactId>lettuce</artifactId>
-                <version>${lettuce.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-redis</artifactId>
-                <version>${spring-data-redis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>${redis.clients.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.couchbase.client</groupId>
                 <artifactId>couchbase-client</artifactId>
@@ -489,16 +406,28 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-couchbase</artifactId>
-                <version>${spring-data-couchbase.version}</version>
+                <artifactId>spring-data-neo4j-rest</artifactId>
+                <version>${sprind-data-neo4j.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-mongodb</artifactId>
-                <version>${spring-data-mongo.version}</version>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth</artifactId>
+                <version>${spring.security.oauth2.version}</version>
             </dependency>
 
-            <!-- Notification library dependencies -->
+            <!-- Template engine dependencies -->
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-jsonSchema</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.samskivert</groupId>
+                <artifactId>jmustache</artifactId>
+                <version>${jmustache.version}</version>
+            </dependency>
 
             <!-- SMS Notification library dependencies -->
 
@@ -523,37 +452,6 @@
 
             <!-- Social Dependencies -->
 
-            <dependency>
-                <groupId>org.springframework.social</groupId>
-                <artifactId>spring-social-core</artifactId>
-                <version>${spring.social.core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.social</groupId>
-                <artifactId>spring-social-web</artifactId>
-                <version>${spring.social.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.social</groupId>
-                <artifactId>spring-social-facebook</artifactId>
-                <version>${spring.social.facebook.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.codehaus.jackson</groupId>
-                        <artifactId>jackson-mapper-asl</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.social</groupId>
-                <artifactId>spring-social-linkedin</artifactId>
-                <version>${spring.social.linkedin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.social</groupId>
-                <artifactId>spring-social-twitter</artifactId>
-                <version>${spring.social.twitter.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.springframework.social</groupId>
                 <artifactId>spring-social-vkontakte</artifactId>
@@ -588,53 +486,6 @@
                 <version>${quartz-redis-jobstore.version}</version>
             </dependency>
 
-            <!-- ORM dependencies -->
-
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.connector.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>c3p0</groupId>
-                <artifactId>c3p0</artifactId>
-                <version>${c3p0.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jdbc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-tx</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-orm</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
-            <!-- AMQP dependencies -->
-
-            <dependency>
-                <groupId>org.springframework.amqp</groupId>
-                <artifactId>spring-amqp</artifactId>
-                <version>${spring.amqp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.amqp</groupId>
-                <artifactId>spring-rabbit</artifactId>
-                <version>${spring.amqp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.rabbitmq</groupId>
-                <artifactId>amqp-client</artifactId>
-                <version>${rabbitmq.driver.version}</version>
-            </dependency>
-
             <!-- Servlet dependencies -->
             <dependency>
                 <groupId>com.thetransactioncompany</groupId>
@@ -666,26 +517,6 @@
 
             <!-- Jackson dependencies -->
 
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.module</groupId>
-                <artifactId>jackson-module-jsonSchema</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>junit</groupId>
@@ -702,6 +533,7 @@
                 <artifactId>object-generator</artifactId>
                 <version>${com.clemble.test.object-generator.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.ning</groupId>
                 <artifactId>async-http-client</artifactId>
@@ -728,40 +560,8 @@
                 <version>${weberknecht.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-autoconfigure</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-beans</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-oxm</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
             <!-- Common dependencies -->
 
-            <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>${javax.inject.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib-nodep</artifactId>
-                <version>${cglib.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
@@ -777,26 +577,6 @@
                 <groupId>com.papertrailapp</groupId>
                 <artifactId>logback-syslog4j</artifactId>
                 <version>${logback-syslog4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.logentries</groupId>
-                <artifactId>logentries-appender</artifactId>
-                <version>${logentries.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.logback-extensions</groupId>
-                <artifactId>logback-ext-loggly</artifactId>
-                <version>${loggly.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback.contrib</groupId>
-                <artifactId>logback-json-classic</artifactId>
-                <version>${loggly.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback.contrib</groupId>
-                <artifactId>logback-jackson</artifactId>
-                <version>${loggly.version}</version>
             </dependency>
 
             <!-- Android dependencies -->
@@ -832,19 +612,6 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>com.clemble.casino</groupId>
-            <artifactId>api-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.clemble.casino</groupId>
-            <artifactId>api-game</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.clemble.casino</groupId>
-            <artifactId>api-presence</artifactId>
-        </dependency>
-
         <!-- Log dependencies -->
 
         <dependency>
@@ -856,59 +623,17 @@
             <artifactId>logback-syslog4j</artifactId>
         </dependency>
 
-        <!-- JSON dependencies -->
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jsonSchema</artifactId>
-        </dependency>
-
-        <!-- General spring dependencies-->
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-oxm</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-        </dependency>
-
         <!-- Test dependencies common for every project -->
 
-        <dependency>
-            <groupId>com.clemble.test</groupId>
-            <artifactId>object-generator</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.clemble.test</groupId>
+            <artifactId>object-generator</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -920,14 +645,6 @@
 
         <!-- Common dependencies -->
 
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
