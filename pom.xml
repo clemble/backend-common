@@ -60,6 +60,15 @@
     </distributionManagement>
     <repositories>
         <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>aws-release</id>
             <name>AWS Release Repository</name>
             <url>s3://clemble/release</url>
