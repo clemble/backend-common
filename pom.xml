@@ -14,8 +14,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>common-web</module>
         <module>template</module>
+        <module>common-web</module>
+        <module>clemble-boot</module>
     </modules>
 
     <properties>
