@@ -232,17 +232,17 @@
             </dependency>
             <dependency>
                 <groupId>com.clemble.casino.server</groupId>
-                <artifactId>email</artifactId>
+                <artifactId>alert-email</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.clemble.casino.server</groupId>
-                <artifactId>notification</artifactId>
+                <artifactId>alert-notification</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.clemble.casino.server</groupId>
-                <artifactId>phone</artifactId>
+                <artifactId>alert-phone</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -416,12 +416,18 @@
                 <version>${spring.security.oauth2.version}</version>
             </dependency>
 
-            <!-- Template engine dependencies -->
-
             <dependency>
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-jsonSchema</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+
+            <!-- Template engine dependencies -->
+
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>template</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
