@@ -7,7 +7,6 @@ import com.clemble.casino.server.event.email.SystemEmailAddedEvent;
 import com.clemble.casino.server.event.email.SystemEmailSendDirectRequestEvent;
 import com.clemble.casino.server.event.email.SystemEmailSendRequestEvent;
 import com.clemble.casino.server.event.email.SystemEmailVerifiedEvent;
-import com.clemble.casino.server.event.game.*;
 import com.clemble.casino.server.event.goal.*;
 import com.clemble.casino.server.event.notification.SystemNotificationAddEvent;
 import com.clemble.casino.server.event.payment.SystemPaymentFreezeRequestEvent;
@@ -27,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes(value = {
     @JsonSubTypes.Type(name = SystemPlayerLeftEvent.CHANNEL, value = SystemPlayerLeftEvent.class),
     @JsonSubTypes.Type(name = SystemPlayerEnteredEvent.CHANNEL, value = SystemPlayerEnteredEvent.class),
-    @JsonSubTypes.Type(name = SystemPlayerPresenceChangedEvent.CHANNEL, value = SystemPlayerPresenceChangedEvent.class),
     @JsonSubTypes.Type(name = SystemPlayerSocialAddedEvent.CHANNEL, value = SystemPlayerSocialAddedEvent.class),
     @JsonSubTypes.Type(name = SystemPlayerDiscoveredConnectionEvent.CHANNEL, value = SystemPlayerDiscoveredConnectionEvent.class),
     @JsonSubTypes.Type(name = SystemPlayerConnectionsFetchedEvent.CHANNEL, value = SystemPlayerConnectionsFetchedEvent.class),
@@ -35,11 +33,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(name = SystemPlayerProfileRegisteredEvent.CHANNEL, value = SystemPlayerProfileRegisteredEvent.class),
     @JsonSubTypes.Type(name = SystemPlayerSocialGrantRegisteredEvent.CHANNEL, value = SystemPlayerSocialGrantRegisteredEvent.class),
     @JsonSubTypes.Type(name = SystemPlayerSocialRegisteredEvent.CHANNEL, value = SystemPlayerSocialRegisteredEvent.class),
-    @JsonSubTypes.Type(name = SystemGameStartedEvent.CHANNEL, value = SystemGameStartedEvent.class),
-    @JsonSubTypes.Type(name = SystemGameEndedEvent.CHANNEL, value = SystemGameEndedEvent.class),
-    @JsonSubTypes.Type(name = SystemGameReadyEvent.CHANNEL, value = SystemGameReadyEvent.class),
-    @JsonSubTypes.Type(name = SystemGameTimeoutEvent.CHANNEL, value = SystemGameTimeoutEvent.class),
-    @JsonSubTypes.Type(name = SystemGameInitiationDueEvent.CHANNEL, value = SystemGameInitiationDueEvent.class),
     @JsonSubTypes.Type(name = SystemPaymentTransactionRequestEvent.CHANNEL, value = SystemPaymentTransactionRequestEvent.class),
     @JsonSubTypes.Type(name = SystemPaymentFreezeRequestEvent.CHANNEL, value = SystemPaymentFreezeRequestEvent.class),
     @JsonSubTypes.Type(name = SystemBetCanceledEvent.CHANNEL, value = SystemBetCanceledEvent.class),

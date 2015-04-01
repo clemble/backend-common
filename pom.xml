@@ -339,37 +339,37 @@
             <!-- Api dependencies -->
 
             <dependency>
-                <groupId>com.clemble.casino</groupId>
+                <groupId>com.clemble.casino.api</groupId>
                 <artifactId>api-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.clemble.casino</groupId>
+                <groupId>com.clemble.casino.api</groupId>
                 <artifactId>api-goal</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.clemble.casino</groupId>
+                <groupId>com.clemble.casino.api</groupId>
                 <artifactId>api-game</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.clemble.casino</groupId>
+                <groupId>com.clemble.casino.api</groupId>
                 <artifactId>api-tag</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.clemble.casino</groupId>
+                <groupId>com.clemble.casino.api</groupId>
                 <artifactId>api-player</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.clemble.casino</groupId>
+                <groupId>com.clemble.casino.api</groupId>
                 <artifactId>api-presence</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.clemble.casino</groupId>
+                <groupId>com.clemble.casino.api</groupId>
                 <artifactId>api-test</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -644,7 +644,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.clemble.casino</groupId>
+            <groupId>com.clemble.casino.api</groupId>
             <artifactId>api-test</artifactId>
             <scope>test</scope>
         </dependency>

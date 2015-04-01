@@ -1,13 +1,11 @@
 package com.clemble.casino.server.spring.common;
 
 import com.clemble.casino.bet.json.BetJsonModule;
-import com.clemble.casino.game.json.GameJsonModule;
 import com.clemble.casino.goal.json.GoalJsonModule;
 import com.clemble.casino.json.CommonJsonModule;
 import com.clemble.casino.json.GenericJsonModule;
 import com.clemble.casino.payment.json.PaymentJsonModule;
 import com.clemble.casino.player.json.PlayerJsonModule;
-import com.clemble.casino.player.json.PresenceJsonModule;
 import com.clemble.casino.tag.json.TagJsonModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.springframework.context.annotation.Bean;
@@ -42,16 +40,6 @@ public class JsonSpringConfiguration implements SpringConfiguration {
     @Bean
     public PlayerJsonModule playerJsonModule() {
         return new PlayerJsonModule();
-    }
-
-    @Bean
-    public PresenceJsonModule presenceJsonModule() {
-        return new PresenceJsonModule();
-    }
-
-    @Bean
-    public GameJsonModule gameJsonModule() {
-        return new GameJsonModule();
     }
 
     @Bean
