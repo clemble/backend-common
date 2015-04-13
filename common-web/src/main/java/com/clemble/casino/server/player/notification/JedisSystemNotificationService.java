@@ -5,6 +5,7 @@ import static com.clemble.casino.utils.Preconditions.checkNotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.amqp.core.AmqpTemplate;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -37,6 +38,11 @@ public class JedisSystemNotificationService implements SystemNotificationService
         } finally {
             jedisPool.returnResource(jedis);
         }
+    }
+
+    @Override
+    public AmqpTemplate getTemplate() {
+        throw new UnsupportedOperationException();
     }
 
 }
