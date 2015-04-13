@@ -70,7 +70,6 @@ public class PaymentClientSpringConfiguration implements SpringConfiguration {
         final public static String PAYMENT_ROUTING_KEY = "payment_client";
         final public static String PAYMENT_QUEUE = "payment_queue";
 
-
         @Autowired(required = false)
         @Qualifier("playerAccountController")
         public PlayerAccountService playerAccountController;

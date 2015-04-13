@@ -1,8 +1,15 @@
 package com.clemble.casino.server.spring.common;
 
 import com.clemble.casino.player.service.PlayerConnectionService;
-import com.clemble.casino.server.connection.PlayerConnectionServiceWrapper;
-import com.clemble.casino.server.connection.RESTPlayerConnectionService;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.rabbitmq.client.ConnectionFactory;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.remoting.client.AmqpProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,14 +17,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.client.ClientHttpRequestExecution;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -38,7 +40,7 @@ public class ConnectionClientSpringConfiguration implements SpringConfiguration{
         @Bean
         public PlayerConnectionService playerConnectionClient(){
             if (playerConnectionController != null)
-                return new PlayerConnectionServiceWrapper(playerConnectionController);
+                return playerConnectionController;
             return new PlayerConnectionService() {
                 @Override
                 public Set<String> getConnections(String player) {
@@ -56,23 +58,46 @@ public class ConnectionClientSpringConfiguration implements SpringConfiguration{
     @Profile(value = { DEFAULT, INTEGRATION_TEST, INTEGRATION_DEFAULT, CLOUD })
     public static class Default {
 
+        final public static String CONNECTION_EXCHANGE = "connection";
+        final public static String CONNECTION_ROUTING_KEY = "connection_client";
+        final public static String CONNECTION_QUEUE = "connection_queue";
+
         @Autowired(required = false)
         @Qualifier("playerConnectionController")
         public PlayerConnectionService playerConnectionController;
 
         @Bean
-        public PlayerConnectionService playerConnectionClient(@Value("${clemble.host}") String base){
+        public PlayerConnectionService playerConnectionClient(
+            @Value("${clemble.service.notification.system.user}") String user,
+            @Value("${clemble.service.notification.system.password}") String password,
+            @Value("${SYSTEM_NOTIFICATION_SERVICE_HOST}") String host
+        ) throws Exception {
             if (playerConnectionController != null)
-                return new PlayerConnectionServiceWrapper(playerConnectionController);
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getInterceptors().add(new ClientHttpRequestInterceptor() {
-                @Override
-                public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-                    request.getHeaders().add("Cookie", "player=casino");
-                    return execution.execute(request, body);
-                }
-            });
-            return new RESTPlayerConnectionService(base, restTemplate);
+                return playerConnectionController;
+
+            ConnectionFactory connectionFactory = new ConnectionFactory();
+            connectionFactory.setHost(host);
+            connectionFactory.setUsername(user);
+            connectionFactory.setPassword(password);
+            connectionFactory.setThreadFactory(new ThreadFactoryBuilder().setNameFormat("CL account client %d").build());
+
+            CachingConnectionFactory springConnectionFactory = new CachingConnectionFactory(connectionFactory);
+
+            RabbitTemplate rabbitTemplate = new RabbitTemplate();
+            rabbitTemplate.setExchange(CONNECTION_EXCHANGE);
+            rabbitTemplate.setRoutingKey(CONNECTION_ROUTING_KEY);
+            rabbitTemplate.setConnectionFactory(springConnectionFactory);
+
+            RabbitAdmin rabbitAdmin = new RabbitAdmin(springConnectionFactory);
+            rabbitAdmin.declareExchange(new DirectExchange(CONNECTION_EXCHANGE, true, false));
+            rabbitAdmin.declareQueue(new Queue(CONNECTION_QUEUE, true));
+            rabbitAdmin.declareBinding(new Binding(CONNECTION_QUEUE, Binding.DestinationType.QUEUE, CONNECTION_EXCHANGE, CONNECTION_ROUTING_KEY, new HashMap<String, Object>()));
+
+            AmqpProxyFactoryBean factoryBean = new AmqpProxyFactoryBean();
+            factoryBean.setAmqpTemplate(rabbitTemplate);
+            factoryBean.setServiceInterface(PlayerConnectionService.class);
+            factoryBean.afterPropertiesSet();
+            return (PlayerConnectionService) factoryBean.getObject();
         }
     }
 
