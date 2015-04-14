@@ -1,0 +1,13 @@
+machine:
+  java:
+    version: oraclejdk8
+  services:
+    - docker
+    - rabbitmq-server
+    - neo4j
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - mvn deploy
