@@ -13,8 +13,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.clemble.casino.server</groupId>
-            <artifactId>common-web</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
         </dependency>
 
         <dependency>
