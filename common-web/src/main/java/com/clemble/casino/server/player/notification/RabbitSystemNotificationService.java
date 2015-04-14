@@ -4,7 +4,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-import com.clemble.casino.server.payment.AmqpPlayerAccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -41,7 +40,6 @@ public class RabbitSystemNotificationService implements SystemNotificationServic
         // TODO make this a configuration concern, and remove from here
         RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
         rabbitAdmin.declareExchange(new TopicExchange(SystemEventListener.EXCHANGE, true, false));
-        rabbitAdmin.declareExchange(new DirectExchange(AmqpPlayerAccountService.PAYMENT_EXCHANGE, true, false));
     }
 
     @Override
