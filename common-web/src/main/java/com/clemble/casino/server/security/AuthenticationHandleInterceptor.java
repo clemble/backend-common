@@ -26,6 +26,8 @@ public class AuthenticationHandleInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         if (uri.endsWith(RegistrationWebMapping.REGISTRATION_LOGIN) ||
             uri.endsWith(RegistrationWebMapping.REGISTRATION_PROFILE) ||
+            uri.endsWith(RegistrationWebMapping.RESET_PASSWORD) ||
+            uri.endsWith(RegistrationWebMapping.RESTORE_PASSWORD) ||
             uri.endsWith(SocialWebMapping.SOCIAL_REGISTRATION_GRANT) ||
             uri.endsWith(SocialWebMapping.SOCIAL_REGISTRATION_DESCRIPTION) ||
             uri.endsWith(SocialWebMapping.SOCIAL_SIGN_IN_BASE))
