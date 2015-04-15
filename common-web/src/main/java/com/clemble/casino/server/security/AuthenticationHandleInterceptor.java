@@ -30,8 +30,9 @@ public class AuthenticationHandleInterceptor implements HandlerInterceptor {
             uri.endsWith(RegistrationWebMapping.RESTORE_PASSWORD) ||
             uri.endsWith(SocialWebMapping.SOCIAL_REGISTRATION_GRANT) ||
             uri.endsWith(SocialWebMapping.SOCIAL_REGISTRATION_DESCRIPTION) ||
-            uri.endsWith(SocialWebMapping.SOCIAL_SIGN_IN_BASE))
+            uri.startsWith(SocialWebMapping.SOCIAL_SIGN_IN_BASE)) {
             return true;
+        }
         // Step 3. Sending 401 Response
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.flushBuffer();
