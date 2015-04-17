@@ -14,11 +14,21 @@ public class SystemPaymentTransactionRequestEvent implements SystemPaymentEvent 
 
     final public static String CHANNEL = "sys:payment:transaction:request";
 
+    final private String transactionKey;
     final private PaymentTransaction transaction;
 
     @JsonCreator
-    public SystemPaymentTransactionRequestEvent(@JsonProperty("transaction") PaymentTransaction transaction) {
+    public SystemPaymentTransactionRequestEvent(
+        @JsonProperty(TRANSACTION_KEY) String transactionKey,
+        @JsonProperty("transaction") PaymentTransaction transaction
+    ) {
+        this.transactionKey = transactionKey;
         this.transaction = transaction;
+    }
+
+    @Override
+    public String getTransactionKey() {
+        return transactionKey;
     }
 
     @Valid

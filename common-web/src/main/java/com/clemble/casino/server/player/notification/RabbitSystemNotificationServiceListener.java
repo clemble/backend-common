@@ -5,6 +5,7 @@ import static com.clemble.casino.utils.Preconditions.checkNotNull;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.google.common.collect.ImmutableList;
 import com.rabbitmq.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,20 +32,27 @@ public class RabbitSystemNotificationServiceListener implements SystemNotificati
     final private String user;
     final private String password;
     final private ObjectMapper objectMapper;
+    final private ImmutableList<SystemEventListenerInterceptor> interceptors;
 
     final private Map<SystemEventListener<?>, RabbitStartupTask<?>> listenerToTask = new HashMap<SystemEventListener<?>, RabbitSystemNotificationServiceListener.RabbitStartupTask<?>>();
 
-    public RabbitSystemNotificationServiceListener(String host, String user, String password, ObjectMapper objectMapper) {
+    public RabbitSystemNotificationServiceListener(
+            String host,
+            String user,
+            String password,
+            ObjectMapper objectMapper,
+            List<SystemEventListenerInterceptor> interceptors) {
         this.host = checkNotNull(host);
         this.user = checkNotNull(user);
         this.password = checkNotNull(password);
         this.objectMapper = checkNotNull(objectMapper);
+        this.interceptors = ImmutableList.copyOf(interceptors);
     }
 
     @Override
     public void subscribe(SystemEventListener<? extends SystemEvent> eventListener) {
         // Step 1. Creating RabbitStartupTask
-        RabbitStartupTask<?> startupTask = listenerToTask.put(eventListener, new RabbitStartupTask<>(host, user, password, objectMapper, eventListener));
+        RabbitStartupTask<?> startupTask = listenerToTask.put(eventListener, new RabbitStartupTask<>(eventListener));
         if(startupTask != null)
             System.exit(1);
     }
@@ -72,22 +81,14 @@ public class RabbitSystemNotificationServiceListener implements SystemNotificati
 
         final private Logger LOG;
 
-        final private String host;
-        final private String user;
-        final private String password;
-        final private ObjectMapper objectMapper;
         final private ScheduledExecutorService executor;
         final private SystemEventListener<T> eventListener;
 
         final AtomicBoolean keepClosed = new AtomicBoolean(false);
         final private AtomicReference<Connection> rabbitConnection = new AtomicReference<Connection>(null);
 
-        public RabbitStartupTask(String host, String user, String password, ObjectMapper objectMapper, SystemEventListener<T> eventListener) {
+        public RabbitStartupTask(SystemEventListener<T> eventListener) {
             this.LOG = LoggerFactory.getLogger(eventListener.getClass());
-            this.host = checkNotNull(host);
-            this.user = checkNotNull(user);
-            this.password = checkNotNull(password);
-            this.objectMapper = checkNotNull(objectMapper);
             this.eventListener = checkNotNull(eventListener);
 
             ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("CL " + eventListener.getQueueName() + " %d").build();
@@ -166,7 +167,7 @@ public class RabbitSystemNotificationServiceListener implements SystemNotificati
 
     }
 
-    final private static class SystemEventListenerAdapter<T extends SystemEvent> implements Consumer {
+    final private class SystemEventListenerAdapter<T extends SystemEvent> implements Consumer {
 
         final private Logger LOG;
         
@@ -200,18 +201,14 @@ public class RabbitSystemNotificationServiceListener implements SystemNotificati
         public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body) throws IOException {
             LOG.debug("Processing {} from {} with routing key {}", consumerTag, envelope.getExchange(), envelope.getRoutingKey());
             // Step 1. Safely reading event
-            T event = null;
-            try {
-                event = (T) objectMapper.readValue(body, SystemEvent.class);
-            } catch(IOException ioe) {
-                LOG.error("Failed to parse message {}", new String(body));
-                LOG.error("FIX_ASAP Ignoring message" , ioe);
-            }
+            final T event = (T) objectMapper.readValue(body, SystemEvent.class);
             // Step 2. If we were able to read event notify, otherwise ignore, some error happened
             if(event != null) {
                 LOG.debug("Extracted event {}", event);
                 try {
+                    interceptors.forEach((i) -> i.preHandle(event));
                     eventListener.onEvent(event);
+                    interceptors.forEach((i) -> i.postHandle(event));
                 } catch (Throwable throwable) {
                     LOG.error("Failed to process message", throwable);
                 }

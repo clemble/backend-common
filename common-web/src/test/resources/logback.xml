@@ -6,6 +6,8 @@
         </layout>
     </appender>
 
+    <logger name="org.springframework.amqp" level="INFO" />
+
     <root level="error">
         <appender-ref ref="STDOUT" />
     </root>

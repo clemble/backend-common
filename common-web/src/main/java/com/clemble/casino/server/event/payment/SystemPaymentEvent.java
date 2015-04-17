@@ -1,9 +1,10 @@
 package com.clemble.casino.server.event.payment;
 
+import com.clemble.casino.payment.PaymentTransactionAware;
 import com.clemble.casino.server.event.SystemEvent;
 
 /**
  * Created by mavarazy on 8/18/14.
  */
-public interface SystemPaymentEvent extends SystemEvent {
+public interface SystemPaymentEvent extends SystemEvent, PaymentTransactionAware {
 }

@@ -1,5 +1,6 @@
 package com.clemble.casino.server.spring;
 
+import com.clemble.casino.server.logging.LoggingControllerInterceptor;
 import com.clemble.casino.server.security.AuthenticationHandleInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -15,6 +16,7 @@ public class WebCommonSpringConfiguration extends WebBasicSpringConfiguration im
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthenticationHandleInterceptor());
+        registry.addInterceptor(new LoggingControllerInterceptor());
     }
 
 }

@@ -2,20 +2,16 @@ package com.clemble.casino.server.spring.common;
 
 import java.io.IOException;
 
+import com.clemble.casino.server.player.notification.*;
+import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import com.clemble.casino.server.player.notification.RabbitSystemNotificationService;
-import com.clemble.casino.server.player.notification.RabbitSystemNotificationServiceListener;
-import com.clemble.casino.server.player.notification.SystemNotificationService;
-import com.clemble.casino.server.player.notification.SystemNotificationServiceListener;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
@@ -40,7 +36,7 @@ public class SystemNotificationSpringConfiguration implements SpringConfiguratio
         @Value("${clemble.service.notification.system.password}") String password,
         @Value("${SYSTEM_NOTIFICATION_SERVICE_HOST}") String host) {
         LOG.debug("Connecting player NotificationService with {0}", user);
-        return new RabbitSystemNotificationServiceListener(host, user, password, mapper);
+        return new RabbitSystemNotificationServiceListener(host, user, password, mapper, ImmutableList.of(new LoggingListenerInterceptor()));
     }
 
 }

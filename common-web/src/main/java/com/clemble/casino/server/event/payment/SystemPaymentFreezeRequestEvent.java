@@ -3,6 +3,7 @@ package com.clemble.casino.server.event.payment;
 import com.clemble.casino.money.Money;
 import com.clemble.casino.money.Operation;
 import com.clemble.casino.payment.PaymentOperation;
+import com.clemble.casino.payment.PaymentTransactionAware;
 import com.clemble.casino.payment.PendingTransaction;
 import com.clemble.casino.player.PlayerAware;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -19,13 +20,21 @@ public class SystemPaymentFreezeRequestEvent implements SystemPaymentEvent {
 
     final public static String CHANNEL = "sys:payment:freeze:request";
 
+    final private String transactionKey;
     final private PendingTransaction transaction;
 
     @JsonCreator
     public SystemPaymentFreezeRequestEvent(
+        @JsonProperty(TRANSACTION_KEY) String transactionKey,
         @JsonProperty("transaction") PendingTransaction transaction
     ) {
+        this.transactionKey = transactionKey;
         this.transaction = transaction;
+    }
+
+    @Override
+    public String getTransactionKey() {
+        return transactionKey;
     }
 
     @Valid
@@ -65,7 +74,7 @@ public class SystemPaymentFreezeRequestEvent implements SystemPaymentEvent {
             new PaymentOperation(player, amount, Operation.Credit),
             new PaymentOperation(PlayerAware.DEFAULT_PLAYER, amount, Operation.Debit)
         );
-        return new SystemPaymentFreezeRequestEvent(new PendingTransaction(key, operations, null));
+        return new SystemPaymentFreezeRequestEvent(key, new PendingTransaction(key, operations, null));
     }
 }
 
