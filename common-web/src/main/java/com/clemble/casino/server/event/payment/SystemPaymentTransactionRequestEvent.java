@@ -62,4 +62,8 @@ public class SystemPaymentTransactionRequestEvent implements SystemPaymentEvent 
     public String toString() {
         return transaction.getTransactionKey() + " > " + CHANNEL;
     }
+
+    public static SystemPaymentTransactionRequestEvent create(PaymentTransaction transaction) {
+        return new SystemPaymentTransactionRequestEvent(transaction.getTransactionKey(), transaction);
+    }
 }
