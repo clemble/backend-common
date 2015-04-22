@@ -1,0 +1,371 @@
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.clemble.casino.server</groupId>
+        <artifactId>server</artifactId>
+        <version>0.17.1-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>stub</artifactId>
+
+        <dependencies>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+            </dependency>
+
+            <!-- Internal components dependencies -->
+
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>common</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>common-web</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>test-utils</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>schedule</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>game</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>player-social</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>alert-email</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>alert-notification</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>alert-phone</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>player-feed</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>player-connection</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>player-presence</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>player-profile</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>player-registration</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>game-web</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>game-configuration</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>game-construction</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>game-management</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>goal-track</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>goal-management</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>goal-construction</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>goal-suggestion</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>goal-configuration</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>tag</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>payment-common</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>payment-transaction</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>payment-bonus</artifactId>
+            </dependency>
+
+            <!-- Api dependencies -->
+
+            <dependency>
+                <groupId>com.clemble.casino.api</groupId>
+                <artifactId>api-common</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.api</groupId>
+                <artifactId>api-goal</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.api</groupId>
+                <artifactId>api-game</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.api</groupId>
+                <artifactId>api-tag</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.api</groupId>
+                <artifactId>api-player</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.api</groupId>
+                <artifactId>api-presence</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.api</groupId>
+                <artifactId>api-test</artifactId>
+            </dependency>
+
+            <!-- Client dependencies -->
+
+            <dependency>
+                <groupId>com.clemble.casino.client</groupId>
+                <artifactId>client-common</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.casino.client</groupId>
+                <artifactId>client-android</artifactId>
+            </dependency>
+
+            <!-- Common dependencies -->
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>com.couchbase.client</groupId>
+                <artifactId>couchbase-client</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-neo4j-rest</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-jsonSchema</artifactId>
+            </dependency>
+
+            <!-- Template engine dependencies -->
+
+            <dependency>
+                <groupId>com.clemble.casino.server</groupId>
+                <artifactId>template</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>com.samskivert</groupId>
+                <artifactId>jmustache</artifactId>
+            </dependency>
+
+            <!-- SMS Notification library dependencies -->
+
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.twilio.sdk</groupId>
+                <artifactId>twilio-java-sdk</artifactId>
+            </dependency>
+
+            <!-- Email Notification library dependencies -->
+
+            <dependency>
+                <groupId>com.mandrillapp.wrapper.lutung</groupId>
+                <artifactId>lutung</artifactId>
+            </dependency>
+
+            <!-- Social Dependencies -->
+
+            <dependency>
+                <groupId>org.springframework.social</groupId>
+                <artifactId>spring-social-vkontakte</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.social</groupId>
+                <artifactId>spring-social-google</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.google.apis</groupId>
+                <artifactId>google-api-services-calendar</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.google.apis</groupId>
+                <artifactId>google-api-services-plusDomains</artifactId>
+            </dependency>
+
+            <!-- Quartz dependencies -->
+
+            <dependency>
+                <groupId>com.novemberain</groupId>
+                <artifactId>quartz-mongodb</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>net.joelinn</groupId>
+                <artifactId>quartz-redis-jobstore</artifactId>
+            </dependency>
+
+            <!-- Servlet dependencies -->
+            <dependency>
+                <groupId>com.thetransactioncompany</groupId>
+                <artifactId>cors-filter</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>servlet-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+            </dependency>
+
+            <!-- Jackson dependencies -->
+
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.robolectric</groupId>
+                <artifactId>robolectric</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.clemble.test</groupId>
+                <artifactId>object-generator</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ning</groupId>
+                <artifactId>async-http-client</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.germane-software</groupId>
+                <artifactId>gozirra-client</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>de.roderick</groupId>
+                <artifactId>weberknecht</artifactId>
+            </dependency>
+
+            <!-- Common dependencies -->
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.papertrailapp</groupId>
+                <artifactId>logback-syslog4j</artifactId>
+            </dependency>
+
+            <!-- Android dependencies -->
+
+            <dependency>
+                <groupId>org.springframework.android</groupId>
+                <artifactId>spring-android-rest-template</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.roboguice</groupId>
+                <artifactId>roboguice</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.google.android</groupId>
+                <artifactId>android</artifactId>
+            </dependency>
+
+            <!-- Facebook testing -->
+            <dependency>
+                <groupId>com.jayway.facebooktestjavaapi</groupId>
+                <artifactId>facebook-test-java-api</artifactId>
+            </dependency>
+
+        </dependencies>
+</project>
