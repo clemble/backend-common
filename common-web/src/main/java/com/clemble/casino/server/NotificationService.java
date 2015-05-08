@@ -1,5 +1,5 @@
 package com.clemble.casino.server;
 
-public interface NotificationService {
+public interface NotificationService extends ServerService {
 
 }
