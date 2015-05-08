@@ -5,8 +5,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class ClembleCasinoHandlerExceptionResolver implements HandlerExceptionResolver {
     
-    final private Logger LOGGER = LoggerFactory.getLogger(ClembleCasinoHandlerExceptionResolver.class);
+    final private Logger LOG = LoggerFactory.getLogger(ClembleCasinoHandlerExceptionResolver.class);
 
     final private ObjectMapper objectMapper;
 
@@ -39,8 +37,10 @@ public class ClembleCasinoHandlerExceptionResolver implements HandlerExceptionRe
     @Override
     @ExceptionHandler(value = Exception.class)
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        LOGGER.error("Error while processing {} with {}", request, handler);
-        LOGGER.error("Log trace ", ex);
+        if (!(ex instanceof ClembleCasinoException)) {
+            LOG.error("while processing {} with {}", request, handler);
+            LOG.error("Log trace ", ex);
+        }
         Collection<ClembleCasinoFailure> errors = new ArrayList<>();
         if (ex instanceof MethodArgumentNotValidException) {
             MethodArgumentNotValidException mae = ((MethodArgumentNotValidException) ex);
