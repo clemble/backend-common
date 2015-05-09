@@ -1,29 +1,27 @@
 package com.clemble.casino.server.event.goal;
 
-import com.clemble.casino.goal.lifecycle.initiation.GoalInitiation;
-import com.clemble.casino.goal.lifecycle.initiation.GoalInitiationAware;
+import com.clemble.casino.goal.lifecycle.construction.GoalConstruction;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by mavarazy on 9/20/14.
  */
-public class SystemGoalStartedEvent implements SystemGoalEvent, GoalInitiationAware {
+public class SystemGoalStartedEvent implements SystemGoalEvent {
 
     final public static String CHANNEL = "sys:goal:started";
 
     final private String goalKey;
-    final private GoalInitiation initiation;
+    final private GoalConstruction construction;
 
     @JsonCreator
-    public SystemGoalStartedEvent(@JsonProperty("goalKey") String goalKey, @JsonProperty("initiation") GoalInitiation initiation) {
+    public SystemGoalStartedEvent(@JsonProperty("goalKey") String goalKey, @JsonProperty("construction") GoalConstruction construction) {
         this.goalKey = goalKey;
-        this.initiation = initiation;
+        this.construction = construction;
     }
 
-    @Override
-    public GoalInitiation getInitiation() {
-        return initiation;
+    public GoalConstruction getConstruction() {
+        return construction;
     }
 
     @Override
@@ -44,7 +42,7 @@ public class SystemGoalStartedEvent implements SystemGoalEvent, GoalInitiationAw
         SystemGoalStartedEvent that = (SystemGoalStartedEvent) o;
 
         if (!goalKey.equals(that.goalKey)) return false;
-        if (!initiation.equals(that.initiation)) return false;
+        if (!construction.equals(that.construction)) return false;
 
         return true;
     }
@@ -52,7 +50,7 @@ public class SystemGoalStartedEvent implements SystemGoalEvent, GoalInitiationAw
     @Override
     public int hashCode() {
         int result = goalKey.hashCode();
-        result = 31 * result + initiation.hashCode();
+        result = 31 * result + construction.hashCode();
         return result;
     }
 
