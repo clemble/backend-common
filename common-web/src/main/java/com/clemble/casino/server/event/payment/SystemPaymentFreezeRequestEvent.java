@@ -3,7 +3,6 @@ package com.clemble.casino.server.event.payment;
 import com.clemble.casino.money.Money;
 import com.clemble.casino.money.Operation;
 import com.clemble.casino.payment.PaymentOperation;
-import com.clemble.casino.payment.PaymentTransactionAware;
 import com.clemble.casino.payment.PendingTransaction;
 import com.clemble.casino.player.PlayerAware;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableSet;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -20,7 +20,9 @@ public class SystemPaymentFreezeRequestEvent implements SystemPaymentEvent {
 
     final public static String CHANNEL = "sys:payment:freeze:request";
 
+    @NotNull
     final private String transactionKey;
+    @NotNull
     final private PendingTransaction transaction;
 
     @JsonCreator

@@ -31,12 +31,19 @@ public class SystemNotificationSpringConfiguration implements SpringConfiguratio
     }
 
     @Bean(destroyMethod = "close")
-    public SystemNotificationServiceListener presenceListenerService(ObjectMapper mapper,
+    public SystemNotificationServiceListenerRegistrar serviceListenerRegistrar(
+        ObjectMapper mapper,
         @Value("${clemble.service.notification.system.user}") String user,
         @Value("${clemble.service.notification.system.password}") String password,
         @Value("${SYSTEM_NOTIFICATION_SERVICE_HOST}") String host) {
         LOG.debug("Connecting player NotificationService with {0}", user);
-        return new RabbitSystemNotificationServiceListener(host, user, password, mapper, ImmutableList.of(new LoggingListenerInterceptor()));
+        SystemNotificationServiceListener serviceListener =  new RabbitSystemNotificationServiceListener(
+            host,
+            user,
+            password,
+            mapper,
+            ImmutableList.of(new LoggingListenerInterceptor()));
+        return new SystemNotificationServiceListenerRegistrar(serviceListener);
     }
 
 }
