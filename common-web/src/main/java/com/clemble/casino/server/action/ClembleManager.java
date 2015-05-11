@@ -62,21 +62,13 @@ public class ClembleManager<R extends Event, T extends State<R, ?>> {
             LOG.debug("Processing {}", action);
             // Step 1. Before move notification
             for (ClembleAspect listener : listenerArray) {
-                try {
-                    listener.onEvent(action);
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
-                }
+                listener.onEvent(action);
             }
             // Step 2. Processing in core
             R event = state.process(action);
             // Step 3 After move notification
             for (ClembleAspect listener : listenerArray) {
-                try {
-                    listener.onEvent(event);
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
-                }
+                listener.onEvent(event);
             }
             // Step 3. Returning game event
             return event;
