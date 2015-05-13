@@ -5,6 +5,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,41 +45,38 @@ public class ClembleCasinoHandlerExceptionResolver implements HandlerExceptionRe
             LOG.error("while processing {} with {}", request, handler);
             LOG.error("Log trace ", ex);
         }
-        Collection<ClembleCasinoFailure> errors = new ArrayList<>();
+        ClembleCasinoFailureDescription clembleFailure = null;
         if (ex instanceof MethodArgumentNotValidException) {
-            MethodArgumentNotValidException mae = ((MethodArgumentNotValidException) ex);
-            mae.getBindingResult().getAllErrors().stream().forEach((o) ->
-                errors.add(new ClembleCasinoFailure(ClembleCasinoError.forCode(o.getDefaultMessage())))
-            );
+            Set<ClembleCasinoError> serverErrors = new HashSet<>();
+            Set<ClembleCasinoFieldError> fieldErrors = new HashSet<>();
+
+            for(ObjectError error:  ((MethodArgumentNotValidException) ex).getBindingResult().getAllErrors()) {
+                ClembleCasinoError clembleCasinoError = ClembleCasinoError.forCode(error.getDefaultMessage());
+                if (error instanceof FieldError) {
+                    String field = ((FieldError) error).getField();
+                    fieldErrors.add(new ClembleCasinoFieldError(field, clembleCasinoError));
+                } else {
+                    serverErrors.add(clembleCasinoError);
+                }
+            }
+
+            clembleFailure = new ClembleCasinoFailureDescription(fieldErrors, serverErrors);
         } else if (ex instanceof ClembleCasinoException) {
-            ClembleCasinoFailureDescription clembleFailure = ((ClembleCasinoException) ex).getFailureDescription();
-            for(ClembleCasinoFailure failure: clembleFailure.getProblems())
-                errors.add(failure);
+            clembleFailure = ((ClembleCasinoException) ex).getFailureDescription();
         } else if(ex instanceof ClembleCasinoServerException) {
-            ClembleCasinoFailureDescription clembleFailure = ((ClembleCasinoServerException) ex).getCasinoException().getFailureDescription();
-            for(ClembleCasinoFailure failure: clembleFailure.getProblems())
-                errors.add(failure);
+            clembleFailure = ((ClembleCasinoServerException) ex).getCasinoException().getFailureDescription();
         } else if (ex instanceof ServletRequestBindingException) {
-            ServletRequestBindingException bindingException = (ServletRequestBindingException) ex;
-            if (!bindingException.getMessage().contains("playerId")) {
-                errors.add(new ClembleCasinoFailure(ClembleCasinoError.BadRequestPlayerIdHeaderMissing));
-            }
-            if (!bindingException.getMessage().contains("sessionId")) {
-                errors.add(new ClembleCasinoFailure(ClembleCasinoError.BadRequestSessionIdHeaderMissing));
-            }
-            if (!bindingException.getMessage().contains("tableId")) {
-                errors.add(new ClembleCasinoFailure(ClembleCasinoError.BadRequestTableIdHeaderMissing));
-            }
+            clembleFailure = ClembleCasinoFailureDescription.SERVER_ERROR;
         }
 
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         response.setHeader("Content-Type", "application/json");
-        for(ClembleCasinoFailure failure: errors) {
-            response.setHeader(ClembleCasinoResponseErrorHandler.ERROR_CODES_HEADER, failure.getError().getCode());
+        for(ClembleCasinoError failure: clembleFailure.getServer()) {
+            response.setHeader(ClembleCasinoResponseErrorHandler.ERROR_CODES_HEADER, failure.getCode());
         }
 
         try {
-            objectMapper.writeValue(response.getOutputStream(), errors);
+            objectMapper.writeValue(response.getOutputStream(), clembleFailure);
         } catch (IOException ignore) {
             ignore.printStackTrace();
         }
