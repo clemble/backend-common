@@ -76,7 +76,6 @@
         <logback-syslog4j.version>1.0.0</logback-syslog4j.version>
         <jackson.version>2.5.1</jackson.version>
         <!-- Test dependencies -->
-        <com.clemble.test.version>0.1.4-SNAPSHOT</com.clemble.test.version>
         <com.clemble.test.object-generator.version>0.1.5</com.clemble.test.object-generator.version>
         <h2.database.version>1.4.186</h2.database.version>
         <junit.version>4.12</junit.version>
