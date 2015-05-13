@@ -3,8 +3,6 @@ package com.clemble.casino.server.error;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,7 +43,7 @@ public class ClembleCasinoHandlerExceptionResolver implements HandlerExceptionRe
             LOG.error("while processing {} with {}", request, handler);
             LOG.error("Log trace ", ex);
         }
-        ClembleCasinoFailureDescription clembleFailure = null;
+        ClembleCasinoFailure clembleFailure = null;
         if (ex instanceof MethodArgumentNotValidException) {
             Set<ClembleCasinoError> serverErrors = new HashSet<>();
             Set<ClembleCasinoFieldError> fieldErrors = new HashSet<>();
@@ -60,13 +58,13 @@ public class ClembleCasinoHandlerExceptionResolver implements HandlerExceptionRe
                 }
             }
 
-            clembleFailure = new ClembleCasinoFailureDescription(fieldErrors, serverErrors);
+            clembleFailure = new ClembleCasinoFailure(fieldErrors, serverErrors);
         } else if (ex instanceof ClembleCasinoException) {
             clembleFailure = ((ClembleCasinoException) ex).getFailureDescription();
         } else if(ex instanceof ClembleCasinoServerException) {
             clembleFailure = ((ClembleCasinoServerException) ex).getCasinoException().getFailureDescription();
         } else if (ex instanceof ServletRequestBindingException) {
-            clembleFailure = ClembleCasinoFailureDescription.SERVER_ERROR;
+            clembleFailure = ClembleCasinoFailure.SERVER_ERROR;
         }
 
         response.setStatus(HttpStatus.BAD_REQUEST.value());
