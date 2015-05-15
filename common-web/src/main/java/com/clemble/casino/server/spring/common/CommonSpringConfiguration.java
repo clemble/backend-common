@@ -24,6 +24,7 @@ public class CommonSpringConfiguration implements SpringConfiguration {
 
     @Bean
     public ValidatorFactory validatorFactory(){
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         return Validation.buildDefaultValidatorFactory();
     }
 

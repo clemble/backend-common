@@ -39,7 +39,7 @@ public class ClembleCasinoHandlerExceptionResolver implements HandlerExceptionRe
     @Override
     @ExceptionHandler(value = Exception.class)
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        if (!(ex instanceof ClembleCasinoException)) {
+        if (!(ex instanceof ClembleCasinoException) && !(ex instanceof MethodArgumentNotValidException)) {
             LOG.error("while processing {} with {}", request, handler);
             LOG.error("Log trace ", ex);
         }
