@@ -63,7 +63,7 @@ public class ClembleCasinoHandlerExceptionResolver implements HandlerExceptionRe
             clembleFailure = ((ClembleCasinoException) ex).getFailureDescription();
         } else if(ex instanceof ClembleCasinoServerException) {
             clembleFailure = ((ClembleCasinoServerException) ex).getCasinoException().getFailureDescription();
-        } else if (ex instanceof ServletRequestBindingException) {
+        } else {
             clembleFailure = ClembleCasinoFailure.SERVER_ERROR;
         }
 

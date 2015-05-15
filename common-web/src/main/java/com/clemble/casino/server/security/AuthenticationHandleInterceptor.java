@@ -1,5 +1,6 @@
 package com.clemble.casino.server.security;
 
+import com.clemble.casino.log.LogWebMapping;
 import com.clemble.casino.registration.RegistrationWebMapping;
 import com.clemble.casino.social.SocialWebMapping;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,8 @@ public class AuthenticationHandleInterceptor implements HandlerInterceptor {
             uri.endsWith(RegistrationWebMapping.RESTORE_PASSWORD) ||
             uri.endsWith(SocialWebMapping.SOCIAL_REGISTRATION_GRANT) ||
             uri.endsWith(SocialWebMapping.SOCIAL_REGISTRATION_DESCRIPTION) ||
-            uri.startsWith(SocialWebMapping.SOCIAL_SIGN_IN_BASE)) {
+            uri.startsWith(SocialWebMapping.SOCIAL_SIGN_IN_BASE) ||
+            uri.endsWith(LogWebMapping.LOG_ERROR)) {
             return true;
         }
         // Step 3. Sending 401 Response
