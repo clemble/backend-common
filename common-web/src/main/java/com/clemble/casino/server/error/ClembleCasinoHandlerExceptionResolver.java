@@ -17,12 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.clemble.casino.client.error.ClembleCasinoResponseErrorHandler;
+import com.clemble.casino.client.error.ClembleResponseErrorHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -39,38 +38,38 @@ public class ClembleCasinoHandlerExceptionResolver implements HandlerExceptionRe
     @Override
     @ExceptionHandler(value = Exception.class)
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        if (!(ex instanceof ClembleCasinoException) && !(ex instanceof MethodArgumentNotValidException)) {
+        if (!(ex instanceof ClembleException) && !(ex instanceof MethodArgumentNotValidException)) {
             LOG.error("while processing {} with {}", request, handler);
             LOG.error("Log trace ", ex);
         }
-        ClembleCasinoFailure clembleFailure = null;
+        ClembleError clembleFailure = null;
         if (ex instanceof MethodArgumentNotValidException) {
-            Set<ClembleCasinoError> serverErrors = new HashSet<>();
-            Set<ClembleCasinoFieldError> fieldErrors = new HashSet<>();
+            Set<ClembleErrorCode> serverErrors = new HashSet<>();
+            Set<ClembleFieldError> fieldErrors = new HashSet<>();
 
             for(ObjectError error:  ((MethodArgumentNotValidException) ex).getBindingResult().getAllErrors()) {
-                ClembleCasinoError clembleCasinoError = ClembleCasinoError.forCode(error.getDefaultMessage());
+                ClembleErrorCode clembleErrorCode = ClembleErrorCode.valueOf(error.getDefaultMessage());
                 if (error instanceof FieldError) {
                     String field = ((FieldError) error).getField();
-                    fieldErrors.add(new ClembleCasinoFieldError(field, clembleCasinoError));
+                    fieldErrors.add(new ClembleFieldError(field, clembleErrorCode));
                 } else {
-                    serverErrors.add(clembleCasinoError);
+                    serverErrors.add(clembleErrorCode);
                 }
             }
 
-            clembleFailure = new ClembleCasinoFailure(fieldErrors, serverErrors);
-        } else if (ex instanceof ClembleCasinoException) {
-            clembleFailure = ((ClembleCasinoException) ex).getFailureDescription();
-        } else if(ex instanceof ClembleCasinoServerException) {
-            clembleFailure = ((ClembleCasinoServerException) ex).getCasinoException().getFailureDescription();
+            clembleFailure = new ClembleError(fieldErrors, serverErrors);
+        } else if (ex instanceof ClembleException) {
+            clembleFailure = ((ClembleException) ex).getFailureDescription();
+        } else if(ex instanceof ClembleServerException) {
+            clembleFailure = ((ClembleServerException) ex).getCasinoException().getFailureDescription();
         } else {
-            clembleFailure = ClembleCasinoFailure.SERVER_ERROR;
+            clembleFailure = ClembleError.SERVER_ERROR;
         }
 
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         response.setHeader("Content-Type", "application/json");
-        for(ClembleCasinoError failure: clembleFailure.getServer()) {
-            response.setHeader(ClembleCasinoResponseErrorHandler.ERROR_CODES_HEADER, failure.getCode());
+        for(ClembleErrorCode failure: clembleFailure.getServer()) {
+            response.setHeader(ClembleResponseErrorHandler.ERROR_CODES_HEADER, failure.name());
         }
 
         try {

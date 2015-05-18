@@ -5,7 +5,7 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.PersistenceExceptionTranslator;
 
-import com.clemble.casino.error.ClembleCasinoException;
+import com.clemble.casino.error.ClembleException;
 
 public class ClembleConstraintExceptionResolver implements PersistenceExceptionTranslator {
 
@@ -18,9 +18,9 @@ public class ClembleConstraintExceptionResolver implements PersistenceExceptionT
             return null;
         if (ex instanceof ConstraintViolationException) {
             ConstraintViolationException violationException = (ConstraintViolationException) ex;
-            ClembleCasinoException casinoException = ClembleCasinoException.fromGenericConstraintViolations(violationException.getConstraintViolations());
+            ClembleException casinoException = ClembleException.fromGenericConstraintViolations(violationException.getConstraintViolations());
             casinoException.setStackTrace(ex.getStackTrace());
-            return new ClembleCasinoDataAccessException(casinoException);
+            return new ClembleDataAccessException(casinoException);
         } else {
             return check(ex.getCause());
         }

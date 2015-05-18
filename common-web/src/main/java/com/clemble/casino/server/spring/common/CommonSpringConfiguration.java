@@ -5,7 +5,7 @@ import javax.validation.ValidatorFactory;
 
 import org.springframework.context.annotation.*;
 
-import com.clemble.casino.error.ClembleCasinoValidationService;
+import com.clemble.casino.error.ClembleValidationService;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.CustomValidatorBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
@@ -18,8 +18,8 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
 public class CommonSpringConfiguration implements SpringConfiguration {
 
     @Bean
-    public ClembleCasinoValidationService clembleValidationService(ValidatorFactory validatorFactory) {
-        return new ClembleCasinoValidationService(validatorFactory);
+    public ClembleValidationService clembleValidationService(ValidatorFactory validatorFactory) {
+        return new ClembleValidationService(validatorFactory);
     }
 
     @Bean
