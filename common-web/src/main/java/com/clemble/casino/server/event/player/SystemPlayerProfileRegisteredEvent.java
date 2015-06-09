@@ -18,7 +18,8 @@ public class SystemPlayerProfileRegisteredEvent implements PlayerProfileAware, S
     @JsonCreator
     public SystemPlayerProfileRegisteredEvent(
         @JsonProperty(PLAYER) String player,
-        @JsonProperty("playerProfile") PlayerProfile profile) {
+        @JsonProperty("playerProfile") PlayerProfile profile
+    ) {
         this.player = player;
         this.profile = profile;
     }

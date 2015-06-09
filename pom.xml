@@ -20,6 +20,7 @@
     </modules>
 
     <properties>
+        <elasticsearch.version>1.5.2</elasticsearch.version>
         <!-- Sources encoding for the maven generated jars -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -185,6 +186,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${validation-api.version}</version>
@@ -314,7 +321,7 @@
             </dependency>
             <dependency>
                 <groupId>com.clemble.casino.api</groupId>
-                <artifactId>api-game</artifactId>
+                <artifactId>api-search</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

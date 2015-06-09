@@ -18,7 +18,10 @@ public class SystemPlayerSocialGrantRegisteredEvent
     final private SocialAccessGrant socialGrant;
 
     @JsonCreator
-    public SystemPlayerSocialGrantRegisteredEvent(@JsonProperty(PLAYER) String player, @JsonProperty("accessGrant") SocialAccessGrant socialGrant) {
+    public SystemPlayerSocialGrantRegisteredEvent(
+        @JsonProperty(PLAYER) String player,
+        @JsonProperty("accessGrant") SocialAccessGrant socialGrant
+    ) {
         this.player = player;
         this.socialGrant = socialGrant;
     }

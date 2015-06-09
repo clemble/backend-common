@@ -18,8 +18,10 @@ public class SystemPlayerSocialRegisteredEvent
     final private SocialConnectionData socialConnectionData;
 
     @JsonCreator
-    public SystemPlayerSocialRegisteredEvent(@JsonProperty(PLAYER) String player,
-                                             @JsonProperty("socialConnectionData") SocialConnectionData socialConnectionData) {
+    public SystemPlayerSocialRegisteredEvent(
+        @JsonProperty(PLAYER) String player,
+        @JsonProperty("socialConnectionData") SocialConnectionData socialConnectionData
+    ) {
         this.player = player;
         this.socialConnectionData = socialConnectionData;
     }
