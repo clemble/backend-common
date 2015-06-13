@@ -1,5 +1,6 @@
 package com.clemble.casino.server.spring.common;
 
+import com.clemble.casino.player.PlayerConnection;
 import com.clemble.casino.player.service.PlayerConnectionService;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.rabbitmq.client.ConnectionFactory;
@@ -43,11 +44,11 @@ public class ConnectionClientSpringConfiguration implements SpringConfiguration{
                 return playerConnectionController;
             return new PlayerConnectionService() {
                 @Override
-                public Set<String> getConnections(String player) {
+                public Set<PlayerConnection> getConnections(String player) {
                     return Collections.emptySet();
                 }
                 @Override
-                public Set<String> myConnections() {
+                public Set<PlayerConnection> myConnections() {
                     return Collections.emptySet();
                 }
             };

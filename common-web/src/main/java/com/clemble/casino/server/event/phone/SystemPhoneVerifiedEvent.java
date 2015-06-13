@@ -34,9 +34,8 @@ public class SystemPhoneVerifiedEvent implements SystemPhoneEvent {
 
         SystemPhoneVerifiedEvent that = (SystemPhoneVerifiedEvent) o;
 
-        if (player != null ? !player.equals(that.player) : that.player != null) return false;
+        return !(player != null ? !player.equals(that.player) : that.player != null);
 
-        return true;
     }
 
     @Override

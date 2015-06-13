@@ -35,9 +35,8 @@ public class SystemGoalTimeoutEvent implements SystemGoalEvent {
 
         SystemGoalTimeoutEvent that = (SystemGoalTimeoutEvent) o;
 
-        if (!goalKey.equals(that.goalKey)) return false;
+        return goalKey.equals(that.goalKey);
 
-        return true;
     }
 
     @Override

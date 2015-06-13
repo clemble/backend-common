@@ -42,9 +42,8 @@ public class SystemBetCompletedEvent implements SystemBetEvent {
         SystemBetCompletedEvent that = (SystemBetCompletedEvent) o;
 
         if (!transactionKey.equals(that.transactionKey)) return false;
-        if (!player.equals(that.player)) return false;
+        return player.equals(that.player);
 
-        return true;
     }
 
     @Override

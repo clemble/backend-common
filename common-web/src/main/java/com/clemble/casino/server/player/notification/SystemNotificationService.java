@@ -8,8 +8,8 @@ import org.springframework.amqp.core.AmqpTemplate;
 // Redis does not provide durable notifications
 public interface SystemNotificationService extends NotificationService {
 
-    public void send(SystemEvent event);
+    void send(SystemEvent event);
 
-    public AmqpTemplate getTemplate();
+    AmqpTemplate getTemplate();
 
 }

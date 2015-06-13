@@ -5,10 +5,10 @@ package com.clemble.casino.server.security;
  */
 public interface TokenRepository {
 
-    public ClembleOAuthProviderToken findOne(String token);
+    ClembleOAuthProviderToken findOne(String token);
 
-    public void save(ClembleOAuthProviderToken token);
+    void save(ClembleOAuthProviderToken token);
 
-    public void delete(String token);
+    void delete(String token);
 
 }

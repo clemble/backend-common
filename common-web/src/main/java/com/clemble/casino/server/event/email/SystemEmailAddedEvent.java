@@ -50,9 +50,8 @@ public class SystemEmailAddedEvent implements SystemEmailEvent {
         SystemEmailAddedEvent that = (SystemEmailAddedEvent) o;
 
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (player != null ? !player.equals(that.player) : that.player != null) return false;
+        return !(player != null ? !player.equals(that.player) : that.player != null);
 
-        return true;
     }
 
     @Override

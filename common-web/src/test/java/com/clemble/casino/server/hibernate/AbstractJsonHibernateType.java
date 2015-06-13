@@ -46,7 +46,7 @@ public class AbstractJsonHibernateType<T extends Serializable> implements UserTy
         T result = null;
         try {
             if (jsonPresentation != null && jsonPresentation.length() > 0)
-                result = (T) OBJECT_MAPPER.readValue(jsonPresentation, returnedClass());
+                result = OBJECT_MAPPER.readValue(jsonPresentation, returnedClass());
         } catch (Throwable ignore) {
             System.out.println(jsonPresentation);
             ignore.printStackTrace();

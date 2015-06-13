@@ -38,15 +38,4 @@ public class RabbitSpringConfiguration implements SpringConfiguration {
         return new RabbitServerNotificationService(PLAYER_CHANNEL_POSTFIX, jsonMessageConverter, host, user, password, systemNotificationService);
     }
 
-    @Bean
-    public ServerNotificationService playerPresenceNotificationService(
-            @Value("${clemble.service.notification.player.user}") String user,
-            @Value("${clemble.service.notification.player.password}") String password,
-            @Value("${PUBLIC_NOTIFICATION_SERVICE_HOST}") String host,
-            Jackson2JsonMessageConverter jsonMessageConverter,
-            SystemNotificationService systemNotificationService) {
-        LOG.debug("Connecting player presence NotificationService with {0}", user);
-        return new RabbitServerNotificationService(PRESENCE_CHANNEL_POSTFIX, jsonMessageConverter, host, user, password, systemNotificationService);
-    }
-
 }

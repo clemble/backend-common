@@ -58,10 +58,8 @@ public class SystemAddJobScheduleEvent implements SystemScheduleEvent {
         if (event != null ? !event.equals(that.event) : that.event != null) return false;
         if (group != null ? !group.equals(that.group) : that.group != null) return false;
         if (key != null ? !key.equals(that.key) : that.key != null) return false;
-        if (triggerStartTime != null ? !triggerStartTime.equals(that.triggerStartTime) : that.triggerStartTime != null)
-            return false;
+        return !(triggerStartTime != null ? !triggerStartTime.equals(that.triggerStartTime) : that.triggerStartTime != null);
 
-        return true;
     }
 
     @Override

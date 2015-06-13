@@ -34,9 +34,8 @@ public class SystemGoalBetOffEvent implements SystemGoalEvent {
 
         SystemGoalBetOffEvent that = (SystemGoalBetOffEvent) o;
 
-        if (!goalKey.equals(that.goalKey)) return false;
+        return goalKey.equals(that.goalKey);
 
-        return true;
     }
 
     @Override

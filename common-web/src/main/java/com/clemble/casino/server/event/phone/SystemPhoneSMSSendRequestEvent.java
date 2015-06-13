@@ -54,9 +54,8 @@ public class SystemPhoneSMSSendRequestEvent implements SystemPhoneEvent, Templat
         SystemPhoneSMSSendRequestEvent that = (SystemPhoneSMSSendRequestEvent) o;
 
         if (!player.equals(that.player)) return false;
-        if (!template.equals(that.template)) return false;
+        return template.equals(that.template);
 
-        return true;
     }
 
     @Override

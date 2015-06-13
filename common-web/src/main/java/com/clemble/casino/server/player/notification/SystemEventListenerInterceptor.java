@@ -7,8 +7,8 @@ import com.clemble.casino.server.event.SystemEvent;
  */
 public interface SystemEventListenerInterceptor {
 
-    public void preHandle(SystemEvent event);
+    void preHandle(SystemEvent event);
 
-    public void postHandle(SystemEvent event);
+    void postHandle(SystemEvent event);
 
 }

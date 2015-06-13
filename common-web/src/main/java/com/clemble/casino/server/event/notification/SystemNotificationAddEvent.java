@@ -36,9 +36,8 @@ public class SystemNotificationAddEvent implements SystemNotificationEvent {
 
         SystemNotificationAddEvent that = (SystemNotificationAddEvent) o;
 
-        if (!notification.equals(that.notification)) return false;
+        return notification.equals(that.notification);
 
-        return true;
     }
 
     @Override

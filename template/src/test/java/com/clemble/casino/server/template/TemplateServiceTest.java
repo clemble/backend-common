@@ -12,7 +12,7 @@ public class TemplateServiceTest {
     @Test
     public void testTemplate() {
         TemplateService templateService = new MustacheTemplateService();
-        String template = templateService.produce("sample", ImmutableMap.<String, String>of("name", "Joe"));
+        String template = templateService.produce("sample", ImmutableMap.of("name", "Joe"));
         Assert.assertEquals(template.trim(), "Hello Joe!");
     }
 

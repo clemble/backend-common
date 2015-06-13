@@ -55,9 +55,8 @@ public class SystemPlayerImageChangedEvent implements SystemPlayerEvent {
         SystemPlayerImageChangedEvent that = (SystemPlayerImageChangedEvent) o;
 
         if (!player.equals(that.player)) return false;
-        if (!redirect.equals(that.redirect)) return false;
+        return redirect.equals(that.redirect);
 
-        return true;
     }
 
     @Override

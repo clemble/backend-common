@@ -52,9 +52,8 @@ public class SystemEmailSendRequestEvent implements SystemEmailEvent, TemplateAw
 
         if (!player.equals(that.player)) return false;
         if (!template.equals(that.template)) return false;
-        if (!params.equals(that.params)) return false;
+        return params.equals(that.params);
 
-        return true;
     }
 
     @Override

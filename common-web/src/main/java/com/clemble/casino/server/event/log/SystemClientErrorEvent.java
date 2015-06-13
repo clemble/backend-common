@@ -46,9 +46,8 @@ public class SystemClientErrorEvent implements SystemEvent, PlayerAware {
         SystemClientErrorEvent that = (SystemClientErrorEvent) o;
 
         if (error != null ? !error.equals(that.error) : that.error != null) return false;
-        if (player != null ? !player.equals(that.player) : that.player != null) return false;
+        return !(player != null ? !player.equals(that.player) : that.player != null);
 
-        return true;
     }
 
     @Override

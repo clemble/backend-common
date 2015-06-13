@@ -41,7 +41,7 @@ abstract public class AbstractWebApplicationInitializer implements WebApplicatio
         // Step 3. Registering appropriate Dispatcher
         ServletRegistration.Dynamic dispatcher = container.addServlet(getClass().getSimpleName(), new DispatcherServlet(rootContext));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");;
+        dispatcher.addMapping("/");
     }
 
 }

@@ -42,9 +42,8 @@ public class SystemRemoveJobScheduleEvent implements SystemScheduleEvent {
         SystemRemoveJobScheduleEvent that = (SystemRemoveJobScheduleEvent) o;
 
         if (!group.equals(that.group)) return false;
-        if (!key.equals(that.key)) return false;
+        return key.equals(that.key);
 
-        return true;
     }
 
     @Override

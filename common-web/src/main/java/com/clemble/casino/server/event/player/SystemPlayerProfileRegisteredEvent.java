@@ -47,9 +47,8 @@ public class SystemPlayerProfileRegisteredEvent implements PlayerProfileAware, S
         SystemPlayerProfileRegisteredEvent that = (SystemPlayerProfileRegisteredEvent) o;
 
         if (!player.equals(that.player)) return false;
-        if (!profile.equals(that.profile)) return false;
+        return profile.equals(that.profile);
 
-        return true;
     }
 
     @Override

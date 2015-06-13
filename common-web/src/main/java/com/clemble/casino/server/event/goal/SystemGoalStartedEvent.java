@@ -42,9 +42,8 @@ public class SystemGoalStartedEvent implements SystemGoalEvent {
         SystemGoalStartedEvent that = (SystemGoalStartedEvent) o;
 
         if (!goalKey.equals(that.goalKey)) return false;
-        if (!construction.equals(that.construction)) return false;
+        return construction.equals(that.construction);
 
-        return true;
     }
 
     @Override

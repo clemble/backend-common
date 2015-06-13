@@ -6,21 +6,21 @@ import javax.validation.Valid;
 
 public interface SystemEventListener<T extends SystemEvent>{
 
-    final public static String EXCHANGE = "clemble.system";
+    String EXCHANGE = "clemble.system";
 
-    public void onEvent(@Valid T event);
+    void onEvent(@Valid T event);
 
 
     /**
      * Returns name of the channel, this listener is associated with
      * @return name of the channel
      */
-    public String getChannel();
+    String getChannel();
 
     /**
      * Naming convension for the Queue is the name of the Channel > + name of the component
      * @return name of the Queue
      */
-    public String getQueueName();
+    String getQueueName();
 
 }

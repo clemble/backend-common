@@ -61,6 +61,6 @@ public interface SystemEvent extends Event {
     // TODO add serialization checks
 
     @JsonIgnore
-    public String getChannel();
+    String getChannel();
 
 }

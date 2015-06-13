@@ -8,16 +8,16 @@ import com.clemble.casino.server.NotificationService;
 
 public interface ServerNotificationService extends NotificationService {
 
-    public <T extends PlayerAware & Event> boolean send(T event);
+    <T extends PlayerAware & Event> boolean send(T event);
 
-    public <T extends PlayerAware & Event> boolean send(Collection<T> events);
+    <T extends PlayerAware & Event> boolean send(Collection<T> events);
 
-    public <T extends Event> boolean send(final String path, final T event);
+    <T extends Event> boolean send(final String path, final T event);
 
-    public <T extends Event> boolean send(final String path, final Collection<T> event);
+    <T extends Event> boolean send(final String path, final Collection<T> event);
 
-    public <T extends Event> boolean send(final Collection<String> players, final T event);
+    <T extends Event> boolean send(final Collection<String> players, final T event);
 
-    public <T extends Event> boolean send(final Collection<String> players, final Collection<? extends T> event);
+    <T extends Event> boolean send(final Collection<String> players, final Collection<? extends T> event);
 
 }

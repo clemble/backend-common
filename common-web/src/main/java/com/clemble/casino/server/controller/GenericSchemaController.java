@@ -28,7 +28,7 @@ public class GenericSchemaController {
 
     public GenericSchemaController(ObjectMapper mapper, Map<String, Class<?>> shemaToClass) {
         this.mapper = checkNotNull(mapper);
-        this.nameToClass = ImmutableMap.<String, Class<?>> copyOf(shemaToClass);
+        this.nameToClass = ImmutableMap.copyOf(shemaToClass);
     }
 
     @RequestMapping(value = "{entity}/schema", method = RequestMethod.GET, produces = "application/json")

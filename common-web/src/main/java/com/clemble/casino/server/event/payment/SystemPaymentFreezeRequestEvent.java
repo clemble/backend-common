@@ -56,9 +56,8 @@ public class SystemPaymentFreezeRequestEvent implements SystemPaymentEvent {
 
         SystemPaymentFreezeRequestEvent that = (SystemPaymentFreezeRequestEvent) o;
 
-        if (transaction != null ? !transaction.equals(that.transaction) : that.transaction != null) return false;
+        return !(transaction != null ? !transaction.equals(that.transaction) : that.transaction != null);
 
-        return true;
     }
 
     @Override
@@ -72,9 +71,9 @@ public class SystemPaymentFreezeRequestEvent implements SystemPaymentEvent {
     }
 
     public static SystemPaymentFreezeRequestEvent create(String key, String player, Money amount) {
-        Set<PaymentOperation> operations = ImmutableSet.<PaymentOperation>of(
-            new PaymentOperation(player, amount, Operation.Credit),
-            new PaymentOperation(PlayerAware.DEFAULT_PLAYER, amount, Operation.Debit)
+        Set<PaymentOperation> operations = ImmutableSet.of(
+                new PaymentOperation(player, amount, Operation.Credit),
+                new PaymentOperation(PlayerAware.DEFAULT_PLAYER, amount, Operation.Debit)
         );
         return new SystemPaymentFreezeRequestEvent(key, new PendingTransaction(key, operations, null));
     }

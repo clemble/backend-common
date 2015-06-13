@@ -40,9 +40,8 @@ public class ClembleOAuthProviderToken extends OAuthProviderTokenImpl {
 
         ClembleOAuthProviderToken that = (ClembleOAuthProviderToken) o;
 
-        if (token != null ? !token.equals(that.token) : that.token != null) return false;
+        return !(token != null ? !token.equals(that.token) : that.token != null);
 
-        return true;
     }
 
     @Override

@@ -51,9 +51,8 @@ public class SystemSharePostEvent implements SystemShareEvent, PlayerAware {
 
         if (!player.equals(that.player)) return false;
         if (!post.equals(that.post)) return false;
-        if (!providerId.equals(that.providerId)) return false;
+        return providerId.equals(that.providerId);
 
-        return true;
     }
 
     @Override

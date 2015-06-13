@@ -54,9 +54,8 @@ public class SystemPlayerSocialRegisteredEvent
         SystemPlayerSocialRegisteredEvent that = (SystemPlayerSocialRegisteredEvent) o;
 
         if (!player.equals(that.player)) return false;
-        if (!socialConnectionData.equals(that.socialConnectionData)) return false;
+        return socialConnectionData.equals(that.socialConnectionData);
 
-        return true;
     }
 
     @Override

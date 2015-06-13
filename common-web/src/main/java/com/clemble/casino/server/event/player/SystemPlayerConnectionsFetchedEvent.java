@@ -49,9 +49,8 @@ public class SystemPlayerConnectionsFetchedEvent implements SystemPlayerEvent, C
         if (connectionKey != null ? !connectionKey.equals(that.connectionKey) : that.connectionKey != null)
             return false;
         if (connections != null ? !connections.equals(that.connections) : that.connections != null) return false;
-        if (player != null ? !player.equals(that.player) : that.player != null) return false;
+        return !(player != null ? !player.equals(that.player) : that.player != null);
 
-        return true;
     }
 
     @Override

@@ -48,9 +48,8 @@ public class SystemPaymentTransactionRequestEvent implements SystemPaymentEvent 
 
         SystemPaymentTransactionRequestEvent that = (SystemPaymentTransactionRequestEvent) o;
 
-        if (transaction != null ? !transaction.equals(that.transaction) : that.transaction != null) return false;
+        return !(transaction != null ? !transaction.equals(that.transaction) : that.transaction != null);
 
-        return true;
     }
 
     @Override

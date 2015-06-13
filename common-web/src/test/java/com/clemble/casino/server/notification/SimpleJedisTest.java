@@ -34,10 +34,10 @@ public class SimpleJedisTest {
                         " redis.call('set', KEYS[i], ARGV[1])" +
                     " end " +
                     " return 'true'");
-            Assert.assertFalse(Boolean.valueOf((String) jedis.evalsha(shaScript, ImmutableList.<String>of("OneKey", "SKey"), ImmutableList.<String>of("A:A"))));
+            Assert.assertFalse(Boolean.valueOf((String) jedis.evalsha(shaScript, ImmutableList.of("OneKey", "SKey"), ImmutableList.of("A:A"))));
 
             jedis.set("OneKey", ":");
-            Assert.assertTrue(Boolean.valueOf((String) jedis.evalsha(shaScript, ImmutableList.<String>of("OneKey", "SKey"), ImmutableList.<String>of("A:A"))));
+            Assert.assertTrue(Boolean.valueOf((String) jedis.evalsha(shaScript, ImmutableList.of("OneKey", "SKey"), ImmutableList.of("A:A"))));
             Assert.assertEquals(jedis.get("OneKey"), "A:A");
             Assert.assertEquals(jedis.get("SKey"), "A:A");
         } finally {

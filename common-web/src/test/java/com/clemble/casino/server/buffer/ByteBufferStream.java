@@ -4,8 +4,8 @@ import java.nio.ByteBuffer;
 
 public interface ByteBufferStream<T> {
 
-    public ByteBuffer write(T value, ByteBuffer writeBuffer);
+    ByteBuffer write(T value, ByteBuffer writeBuffer);
 
-    public T read(ByteBuffer readBuffer);
+    T read(ByteBuffer readBuffer);
 
 }

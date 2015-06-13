@@ -7,6 +7,6 @@ import java.util.Map;
  */
 public interface TemplateAware {
 
-    public String getTemplate();
+    String getTemplate();
 
 }

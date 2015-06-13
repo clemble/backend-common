@@ -35,9 +35,8 @@ public class SystemPostAddEvent implements SystemPostEvent {
 
         SystemPostAddEvent that = (SystemPostAddEvent) o;
 
-        if (!post.equals(that.post)) return false;
+        return post.equals(that.post);
 
-        return true;
     }
 
     @Override

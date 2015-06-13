@@ -58,9 +58,8 @@ public class SystemEmailSendDirectRequestEvent implements SystemEmailEvent, Temp
         if (!email.equals(that.email)) return false;
         if (!params.equals(that.params)) return false;
         if (!player.equals(that.player)) return false;
-        if (!template.equals(that.template)) return false;
+        return template.equals(that.template);
 
-        return true;
     }
 
     @Override

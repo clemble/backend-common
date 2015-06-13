@@ -56,9 +56,8 @@ public class SystemGoalReachedEvent implements SystemGoalEvent, PlayerAware {
 
         if (!state.equals(that.state)) return false;
         if (!goalKey.equals(that.goalKey)) return false;
-        if (!player.equals(that.player)) return false;
+        return player.equals(that.player);
 
-        return true;
     }
 
     @Override

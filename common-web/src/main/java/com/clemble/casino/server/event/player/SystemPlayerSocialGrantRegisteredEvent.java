@@ -54,9 +54,8 @@ public class SystemPlayerSocialGrantRegisteredEvent
         SystemPlayerSocialGrantRegisteredEvent that = (SystemPlayerSocialGrantRegisteredEvent) o;
 
         if (!player.equals(that.player)) return false;
-        if (!socialGrant.equals(that.socialGrant)) return false;
+        return socialGrant.equals(that.socialGrant);
 
-        return true;
     }
 
     @Override

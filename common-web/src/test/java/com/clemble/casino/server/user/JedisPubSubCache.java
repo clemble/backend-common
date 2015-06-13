@@ -59,7 +59,7 @@ public class JedisPubSubCache extends JedisPubSub implements RedisSubscribersAwa
 
     @Override
     public Collection<String> getPatterns() {
-        return ImmutableList.<String>of("*");
+        return ImmutableList.of("*");
     }
 
     @Override

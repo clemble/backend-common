@@ -4,8 +4,8 @@ import java.util.Collection;
 
 public interface RedisSubscribersAware {
 
-    public Collection<String> getChannels();
+    Collection<String> getChannels();
 
-    public Collection<String> getPatterns();
+    Collection<String> getPatterns();
 
 }
