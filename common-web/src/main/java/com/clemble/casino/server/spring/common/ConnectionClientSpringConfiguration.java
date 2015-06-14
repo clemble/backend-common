@@ -44,12 +44,20 @@ public class ConnectionClientSpringConfiguration implements SpringConfiguration{
                 return playerConnectionController;
             return new PlayerConnectionService() {
                 @Override
+                public Set<PlayerConnection> myConnections() {
+                    return Collections.emptySet();
+                }
+                @Override
+                public Integer myConnectionsCount() {
+                    return 0;
+                }
+                @Override
                 public Set<PlayerConnection> getConnections(String player) {
                     return Collections.emptySet();
                 }
                 @Override
-                public Set<PlayerConnection> myConnections() {
-                    return Collections.emptySet();
+                public Integer getConnectionsCount(String player) {
+                    return 0;
                 }
             };
         }
