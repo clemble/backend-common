@@ -3,6 +3,9 @@ language: java
 jdk:
     - oraclejdk8
 
+- secure: 
+    - stwgg7q67i2ya/0jn9TtAcYZWeREbQ0y62lRVQ7/JKnbJUiH3HI2AqYW+euy56snJ5dO2d1JcwYNc+ASZPQ3fv1UHhwxTaJzPqoq9WUdnaPQvvD4gQm4RkuA2wecXHUI2BsVWUYchm253jmDPnYBEXwHdAAS7WHtRQTi5sRMTJmiUh6ouGH6YQABYJBGrmPuUonRopnKoEgimzYtjzcaPMMC1U67IAP26iZ04eaWV+ndu7V7QWzky/lxaxOkuDdvr+FMiDo0J0KVIyjOEUjTlVHgRnPyDUygzh1jwcn35YIEOP9ydaiDkdifLBGIusS4uBHZOhFWUCbzBCt3czhO3g==
+
 services:
     - rabbitmq
     - mongodb
