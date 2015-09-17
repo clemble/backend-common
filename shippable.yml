@@ -1,0 +1,13 @@
+language: java
+
+jdk:
+    - oraclejdk8
+
+services:
+    - rabbitmq
+    - mongodb
+    - neo4j
+
+after_script:
+    - mvn deploy
+
