@@ -17,7 +17,7 @@ public class RedisSpringConfiguration implements SpringConfiguration {
     public JedisPool jedisPool(
         @Value("${REDIS_MASTER_SERVICE_HOST}") String host,
         @Value("${REDIS_MASTER_SERVICE_PORT}") int port) {
-        return new JedisPool(host);
+        return new JedisPool(host, port);
     }
 
 }
