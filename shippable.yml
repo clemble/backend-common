@@ -12,5 +12,6 @@ services:
     - neo4j
 
 after_script:
+    - export
     - mvn deploy
 
